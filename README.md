@@ -9,7 +9,68 @@ This project was produced with the intention for educational use in chemoinforma
 development, and it does not rely on external chemoinformatics libraries such as RDKit, although it 
 would make the code simpler and more efficient.
 ## Quick start instructions
- 
+2.1 
+Prerequisites 
+Ensure Julia (version 1.6 or later recommended) is installed on the system. 
+The external package MolecularGraph is required. If it is not already installed, follow these steps: 
+1. Open the Julia REPL: Launch the Julia app (on Windows/macOS) or type julia in your terminal 
+(Windows/Linux/macOS). You will see a banner and the green julia> prompt. 
+2. Enter Package Mode: Press the ] key. The prompt will change to blue and display (@v1.x) pkg>, 
+indicating you are in the package manager. 
+3. Install the Library: Type the following command and press Enter: 
+add MolecularGraph 
+4. Exit Package Mode: Once installed, press Backspace to return to the standard julia> prompt. 
+All 5 source files (main_pipeline.jl, SMILES_to_graph.jl, MCS_Algorithm.jl, graph_to_SMILES.jl, 
+visualize_smiles.jl) must be located in the same directory. 
+2.2 
+Launching the software 
+1. Open a system terminal: Open your operating system's standard command line interface: 
+2 
+ Windows: Command Prompt (cmd) or PowerShell. 
+ macOS/Linux: Terminal. 
+Do not open the Julia app (REPL) for this step; you must use the system shell. 
+2. Navigate to the directory: Use the cd (change directory) command to navigate to the folder where 
+you saved the 5 source files. For example: 
+cd path/to/your/files 
+3. Execute the pipeline: Run the following command to start the program: 
+julia main_pipeline.jl 
+2.3 
+Required inputs 
+1. Start-up: Upon launching, the program initiates the startup sequence.  
+Note: The first execution may take a few seconds as the Julia interpreter precompiles the 
+MolecularGraph library. 
+2. The console will display the header and prompt for the first molecule: 
+========================================== 
+MOLECULAR MCS PIPELINE (JULIA)       
+FOR ALIPHATIC COMPOUNDS ONLY 
+========================================== 
+[Step 1] Input 
+Enter 1st aliphatic SMILES: 
+At this point, the user must enter the first SMILES string and press the Enter key. 
+For example, to input ethanol, the following SMILES string should be provided: 
+CCO 
+After the first SMILES is entered, the program prompts for the second input: 
+Enter 2nd aliphatic SMILES: 
+The user must then enter the second SMILES string and press the Enter key. 
+For validation purposes, insert the n-propanol SMILES: 
+CCCO 
+3 
+ 4 
+3. Error handling – empty input: If the user presses the Enter key without providing a SMILES 
+string, the program detects the invalid input, prints an error message, and immediately terminates 
+execution. The following message is displayed: 
+[Step 1] Input 
+Enter 1st aliphatic SMILES: 
+ERROR, enter a valid SMILES 
+4. Error handling – aromatic input: If the user enters a SMILES string containing aromatic atoms 
+(detected by lowercase letters, e.g., c1ccccc1), the program identifies these as unsupported features. 
+It prints a notification regarding the limitation and immediately terminates execution. The following 
+message is displayed: 
+[Step 1] Input 
+Enter 1st aliphatic SMILES: c1ccccc1 
+Sorry, the program is not able to handle aromatics yet 
+In both cases, no further actions are performed after the error is displayed; the execution is 
+interrupted, and the program must be restarted to continue. 
 2.4 Expected outputs 
 1. Console output: Upon successful execution, the terminal will display a log detailing the processing 
 steps, node counts, and the final SMILES result. The output must match the following format: 
